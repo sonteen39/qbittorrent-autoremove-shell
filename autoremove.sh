@@ -21,8 +21,7 @@ echo "$TORRENT_LIST" | jq -c '.[]' | while read -r TORRENT; do
     NAME=$(echo "$TORRENT" | jq -r '.name')
     LAST_ACTIVITY=$(echo "$TORRENT" | jq -r '.last_activity')
     CURRENT_TIME=$(date +%s)
-    LAST_ACTIVITY_TIME=$(date -d "$LAST_ACTIVITY" +%s)
-    DIFF_DAYS=$(( (CURRENT_TIME - LAST_ACTIVITY_TIME) / 86400 ))
+    DIFF_DAYS=$(( (CURRENT_TIME - LAST_ACTIVITY) / 86400 ))
 
     # ถ้า last activity มากกว่า 10 วัน
     if [ "$DIFF_DAYS" -gt 10 ]; then
